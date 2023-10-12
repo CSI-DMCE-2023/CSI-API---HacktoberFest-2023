@@ -12,7 +12,7 @@ router.get("/category", async (req, res) => {
 });
 
 
-router.get('/products/categories/:category',(req,res)=>{
+router.get('/categories/:category',(req,res)=>{
   const category=req.params.category;
   let result=[];
   Products.map(a => {
