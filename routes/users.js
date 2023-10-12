@@ -11,10 +11,6 @@ router.get("/search", (req, res) => {
 
   let filteredUsers = Users;
 
-  if (username) {
-    filteredUsers = filteredUsers.filter((user) => user.username === username);
-  }
-
   if (zipcode) {
     filteredUsers = filteredUsers.filter(
       (user) => user.address.zipcode === zipcode
