@@ -12,7 +12,7 @@ router.get("/search" , (req,res) => {
     if(!username) return res.send(Users);
 
     const user = Users.filter((user) => user.username === username);
-    
+
     res.send(user);
 });
 
