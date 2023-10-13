@@ -11,20 +11,29 @@ router.get("/category", async (req, res) => {
   res.send(allCategories);
 });
 
-
-router.get('/categories/:category',(req,res)=>{
-  const category=req.params.category;
-  let result=[];
-  Products.map(a => {
-    if(a.category===category)
-      return result.push(a);
+router.get("/categories/:category", (req, res) => {
+  const category = req.params.category;
+  let result = [];
+  Products.map((a) => {
+    if (a.category === category) return result.push(a);
   });
-  if(result.length !== 0){
+  if (result.length !== 0) {
     res.send(result);
-  }else{
+  } else {
     res.status(404).send("Category Not Found");
   }
-})
+});
 
+router.get("/search", (req, res) => {
+  const title = req.query.title;
+  let result = Products.filter((product) => {
+    return product.title.toLowerCase().includes(title.toLowerCase());
+  });
+  if (result.length !== 0) {
+    res.send(result);
+  } else {
+    res.status(404).send("Product Not Found");
+  }
+});
 
 module.exports = router;
