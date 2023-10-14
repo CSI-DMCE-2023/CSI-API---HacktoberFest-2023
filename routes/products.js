@@ -48,15 +48,7 @@ router.get("/search/:userId", (req, res) => {
   } else {
     res.status(404).send("No Product found");
   }
-  // const userId = req.params.userId;
-  // let result = Products.filter((product)=>{
-  //   return product.id.includes(userId);
-  // })
-  // if(result.length !==0){
-  //   res.send(result);
-  // }else{
-  //   res.status(404).send("product not found");
-  // }
+  
 })
 
 module.exports = router;
