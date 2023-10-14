@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Products = require("../Products.json");
+const Posts = require("../Posts.json");
 
 router.get("/", (req, res) => {
   res.send(Products);
@@ -35,5 +36,27 @@ router.get("/search", (req, res) => {
     res.status(404).send("Product Not Found");
   }
 });
+
+router.get("/search/:userId", (req, res) => {
+  const userId  = parseInt(req.params.userId);
+  let results = [];
+  Posts.posts.map((post) => {
+    if(post.userId === userId)results.push(post);
+  });
+  if (results.length !== 0) {
+    res.send(results);
+  } else {
+    res.status(404).send("No Product found");
+  }
+  // const userId = req.params.userId;
+  // let result = Products.filter((product)=>{
+  //   return product.id.includes(userId);
+  // })
+  // if(result.length !==0){
+  //   res.send(result);
+  // }else{
+  //   res.status(404).send("product not found");
+  // }
+})
 
 module.exports = router;
