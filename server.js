@@ -3,7 +3,9 @@ const app = express();
 const port = process.env.PORT || 8000;
 const productsRouter = require("./routes/products");
 const usersRouter = require("./routes/users");
+const postRouter = require('./routes/posts');
 
+app.use("/posts",postRouter);
 app.get("/", (req, res) => res.send("Hello World!"));
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
