@@ -27,4 +27,22 @@ router.get('/categories/:category',(req,res)=>{
 })
 
 
+router.get("/", (req, res) => {
+  const minPrice = parseFloat(req.query.minPrice);
+  const maxPrice = parseFloat(req.query.maxPrice);
+
+  if (minPrice  && maxPrice) {
+    const filteredProducts = Products.filter((product) => {
+      const productPrice = parseFloat(product.price);
+      return productPrice >= minPrice && productPrice <= maxPrice;
+    });
+
+    console.log(filteredProducts.length);
+    res.json(filteredProducts);
+  } else {
+    res.send(Products);
+  }
+});
+
+
 module.exports = router;
