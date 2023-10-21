@@ -12,6 +12,6 @@ router.get("/category", getAllCategories);
 
 router.get("/categories/:category", getProductByCategory);
 
-router.get("/", filterProducts);
+router.get("/filter", filterProducts);
 
 module.exports = router;

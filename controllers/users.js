@@ -15,7 +15,23 @@ const searchUsers = async (req, res) => {
     );
   }
 
+  if (username) {
+    filteredUsers = filteredUsers.filter((user) => user.username === username);
+  }
+
   res.json(filteredUsers);
 };
 
-module.exports = { getAllUsers, searchUsers };
+const paginateUsers = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 5;
+
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = page * pageSize;
+
+  const usersOnPage = Users.slice(startIndex, endIndex);
+
+  res.json({ pageSize, currentPage: page, usersOnPage });
+};
+
+module.exports = { getAllUsers, searchUsers, paginateUsers };

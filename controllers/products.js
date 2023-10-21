@@ -24,19 +24,23 @@ const getProductByCategory = async (req, res) => {
 };
 
 const filterProducts = async (req, res) => {
-  const minPrice = parseFloat(req.query.minPrice);
-  const maxPrice = parseFloat(req.query.maxPrice);
+  const minPrice = req.query.minPrice;
+  const maxPrice = req.query.maxPrice;
 
-  if (minPrice && maxPrice) {
-    const filteredProducts = Products.filter((product) => {
-      const productPrice = parseFloat(product.price);
-      return productPrice >= minPrice && productPrice <= maxPrice;
+  let filteredProducts = Products;
+
+  if (minPrice) {
+    filteredProducts = filteredProducts.filter((product) => {
+      return product.price >= minPrice;
     });
-
-    res.json(filteredProducts);
-  } else {
-    res.send(Products);
   }
+  if (maxPrice) {
+    filteredProducts = filteredProducts.filter((product) => {
+      return product.price <= maxPrice;
+    });
+  }
+
+  res.json({ nb: filteredProducts.length, filteredProducts });
 };
 
 module.exports = {
