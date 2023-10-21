@@ -1,23 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../Users.json");
+const { getAllUsers, searchUsers } = require("../controllers/users");
 
-router.get("/", (req, res) => {
-  res.send(Users);
-});
+router.get("/", getAllUsers);
 
-router.get("/search", (req, res) => {
-  const { zipcode, username } = req.query;
-
-  let filteredUsers = Users;
-
-  if (zipcode) {
-    filteredUsers = filteredUsers.filter(
-      (user) => user.address.zipcode === zipcode
-    );
-  }
-
-  res.json(filteredUsers);
-});
+router.get("/search", searchUsers);
 
 module.exports = router;
