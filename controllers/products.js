@@ -43,9 +43,22 @@ const filterProducts = async (req, res) => {
   res.json({ nb: filteredProducts.length, filteredProducts });
 };
 
+const paginateProducts = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 5;
+
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = page * pageSize;
+
+  const productsOnPage = Products.slice(startIndex, endIndex);
+
+  res.json({ pageSize, currentPage: page, productsOnPage });
+};
+
 module.exports = {
   getAllCategories,
   getProductByCategory,
   getAllProducts,
   filterProducts,
+  paginateProducts,
 };
