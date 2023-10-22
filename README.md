@@ -74,9 +74,3 @@ git push -u origin branchname
 ```
 #### 6. Create a new pull request from the forked repository.
 
-
-## Acknowledgements
-
-
-- [React js](https://reactjs.org/)
-- [Bootstrap](https://getbootstrap.com/)
